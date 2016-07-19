@@ -24,10 +24,12 @@ class Timer
      *
      * @breif 构造函数
      * @param precision int | 计时器的精度
+     * @param isRunStart booolean | 是否实例化的时候运行start方法
      */
-    public function __construct($precision = self::PRECISION_S)
+    public function __construct($precision = self::PRECISION_S, $isRunStart = false)
     {
         $this->precision = $precision;
+        $isRunStart && $this->start();
     }
 
     /**

@@ -34,10 +34,27 @@ class TimerManager
     public static function start($name)
     {
         if (!array_key_exists($name, self::$allTimer)) {
-            self::$allTimer[$name] = new Timer(self::$precision);
+            self::$allTimer[$name] = new Timer(self::$precision, true);
             return true;
         } else {
             return self::$allTimer[$name]->start();
         }
     }
+
+    /**
+     *
+     * @breif 结束一个计时器
+     */
+    public static function stop($name)
+    {
+        if (!array_key_exists($name, self::$allTimer)) {
+            return false;
+        }
+        return $this->allTimer[$name]->stop();
+    }
+
+    /**
+     *
+     * 
+     */
 }
