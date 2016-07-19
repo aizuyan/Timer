@@ -21,7 +21,7 @@ class TimerManager
      *
      * 设置精度
      */
-    private static function setPrecision($precision)
+    public static function setPrecision($precision)
     {
         self::$precision = $precision;
     }
@@ -37,7 +37,8 @@ class TimerManager
             self::$allTimer[$name] = new Timer(self::$precision, true);
             return true;
         } else {
-            return self::$allTimer[$name]->start();
+			$ret = self::$allTimer[$name]->start();
+			return $ret;
         }
     }
 
@@ -50,11 +51,32 @@ class TimerManager
         if (!array_key_exists($name, self::$allTimer)) {
             return false;
         }
-        return $this->allTimer[$name]->stop();
+		$ret = self::$allTimer[$name]->stop();
+		return $ret;
     }
 
     /**
      *
-     * 
-     */
+     * @breif 获取所有的计时器信息
+	 */
+	public static function allTimerUsed()
+	{
+		$ret = [];
+		foreach (self::$allTimer as $name => $timer) {
+			$ret[$name] = $timer->getTimeUsed();
+		}
+		return $ret;
+	}
 }
+
+
+TimerManager::setPrecision(Timer::PRECISION_MS);
+
+TimerManager::start('ps_yanruitao');
+sleep(1);
+TimerManager::start('ps_yrt');
+usleep(1000);
+TimerManager::stop('ps_yrt');
+TimerManager::stop('ps_yanruitao');
+
+print_r(TimerManager::allTimerUsed());

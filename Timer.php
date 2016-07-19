@@ -29,7 +29,7 @@ class Timer
     public function __construct($precision = self::PRECISION_S, $isRunStart = false)
     {
         $this->precision = $precision;
-        $isRunStart && $this->start();
+		$isRunStart && $this->start();
     }
 
     /**
@@ -41,7 +41,7 @@ class Timer
     public function start()
     {
         $this->beginTime = $this->getTime(self::PRECISION_US);
-        return $tihs->beginTime;
+        return $this->beginTime;
     }
 
     /**
@@ -82,6 +82,13 @@ class Timer
         }
     }
 
+	/**
+	 *
+	 * @breif 根据精度获取当前的时间戳
+	 * @param precision int | 精度
+	 *
+	 * @return int | 当前的时间戳，根据精度不同返回秒、毫秒、微妙级时间戳
+	 */
     private function getTime($precision)
     {
         list($usec, $sec) = explode(" ", microtime());
@@ -100,5 +107,3 @@ class Timer
         }
     }
 }
-
-var_dump(new Timer(Timer::PRECISION_US));
