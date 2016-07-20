@@ -39,8 +39,8 @@ class TimerManager
             self::$allTimer[$name] = new Timer(self::$precision, true);
             return true;
         } else {
-			$ret = self::$allTimer[$name]->start();
-			return $ret;
+            $ret = self::$allTimer[$name]->start();
+            return $ret;
         }
     }
 
@@ -53,20 +53,20 @@ class TimerManager
         if (!array_key_exists($name, self::$allTimer)) {
             return false;
         }
-		$ret = self::$allTimer[$name]->stop();
-		return $ret;
+        $ret = self::$allTimer[$name]->stop();
+        return $ret;
     }
 
     /**
      *
      * @breif 获取所有的计时器信息
-	 */
-	public static function allTimerUsed()
-	{
-		$ret = [];
-		foreach (self::$allTimer as $name => $timer) {
-			$ret[$name] = $timer->getTimeUsed();
-		}
-		return $ret;
-	}
+     */
+    public static function allTimerUsed()
+    {
+        $ret = [];
+        foreach (self::$allTimer as $name => $timer) {
+            $ret[$name] = $timer->getTimeUsed();
+        }
+        return $ret;
+    }
 }

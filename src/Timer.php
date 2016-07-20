@@ -32,32 +32,32 @@ class Timer
     public function __construct($precision = self::PRECISION_S, $isRunStart = false)
     {
         $this->precision = $precision;
-		$isRunStart && $this->start();
+        $isRunStart && $this->start();
     }
 
     /**
      *
      * @breif 计时器开始计时
      *
-     * @return int | 开始计数的时间微妙（us）
+     * @return boolean | 是否开始成功
      */
     public function start()
     {
         $this->beginTime = $this->getTime(self::PRECISION_US);
-        return $this->beginTime;
+        return true;
     }
 
     /**
      *
      * @breif 计时器停止计数
      *
-     * @return int | 经过的时间的微秒数（us）
+     * @return boolean | 是否成功
      */
     public function stop()
     {
         $endTime    = $this->getTime(self::PRECISION_US);
         $this->timeUsed += $endTime - $this->beginTime;
-        return $endTime;
+        return true;
     }
 
     /**
@@ -85,13 +85,13 @@ class Timer
         }
     }
 
-	/**
-	 *
-	 * @breif 根据精度获取当前的时间戳
-	 * @param precision int | 精度
-	 *
-	 * @return int | 当前的时间戳，根据精度不同返回秒、毫秒、微妙级时间戳
-	 */
+    /**
+     *
+     * @breif 根据精度获取当前的时间戳
+     * @param precision int | 精度
+     *
+     * @return int | 当前的时间戳，根据精度不同返回秒、毫秒、微妙级时间戳
+     */
     private function getTime($precision)
     {
         list($usec, $sec) = explode(" ", microtime());
